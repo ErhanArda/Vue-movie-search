@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    {{$store.state.isLoading}}
     <b-card class="my-5 nx-5">
       <label>Movie Search</label>
       <b-form-input

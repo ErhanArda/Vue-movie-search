@@ -7,23 +7,33 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     searchMovies: [],
+    isLoading: false
 
   },
   mutations: {
-    setMovies(state,payload){
+    SET_MOVIES(state,payload){
       state.searchMovies = payload
+    },
+    SET_LOADING(state,loadingStatus){
+      state.isLoading = loadingStatus
     }
+
   },
   actions: {
     searchMovie: ({ commit }, payload) => {
+      commit('SET_LOADING',true)
       axios.get('http://www.omdbapi.com/?i=tt3896198&apikey=d9fdf1b8&s='+ payload)
         .then((response)=> {
+          commit('SET_LOADING',false)
           if(response.data.totalResults){
-            commit('setMovies', response.data.Search)
+            commit('SET_MOVIES', response.data.Search)
           }
+          // else{
+          //   window.vueInstance.$bvToast.toast(response.data.Error,{
+          //     title: 'Error'
+          //   })
+          // }
         })
     }
   },
-  modules: {
-  }
 })
