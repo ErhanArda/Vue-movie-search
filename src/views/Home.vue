@@ -8,26 +8,7 @@
       ></b-form-input>
     </b-card>
     <b-card>
-        <table class="table">
-          <thead>
-            <tr>
-              <td>Title</td>
-              <td>Type</td>
-              <td>Year</td>
-              <td>Poster</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(item,index) in searchMovies" :key="index">
-              <td>{{ item.Title }}</td>
-              <td> {{ item.Type}} </td>
-              <td> {{ item.Year }} </td>
-              <td>
-                <img :src="item.Poster" width="200px">
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <tableComp :data-list ="searchMovies"/>
     </b-card>
   </div>
 </template>
@@ -35,12 +16,16 @@
 <script>
 import debounce from "lodash/debounce";
 import { mapState } from "vuex";
+import tableComp from '../components/tableComp'
 export default {
   name: "Home",
   data() {
     return {
       searchText: "",
     };
+  },
+  components: {
+    tableComp
   },
 
   watch: {
