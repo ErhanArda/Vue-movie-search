@@ -7,7 +7,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     searchMovies: [],
-    isLoading: false
+    isLoading: false,
+    favorites:[]
 
   },
   mutations: {
@@ -16,6 +17,13 @@ export default new Vuex.Store({
     },
     SET_LOADING(state,loadingStatus){
       state.isLoading = loadingStatus
+    },
+    SET_FAVORITE(state,movie){
+      state.favorites.push(movie)
+    },
+    REMOVE_FAVORITE(state,movie){
+      const index = state.favorites.findIndex((item)=> item.imdbID === movie.imdbID)
+      state.favorites.splice(index,1)
     }
 
   },
